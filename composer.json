@@ -1,0 +1,53 @@
+{
+    "name": "italix/mvc",
+    "description": "PSR-15 engine, middleware pipeline, service registry, controllers with declared dependencies, view renderer with block layouts, sessions and translation",
+    "type": "library",
+    "license": "MPL-2.0",
+    "version": "2.0.0",
+    "keywords": [
+        "mvc",
+        "psr-15",
+        "psr-7",
+        "middleware",
+        "routing",
+        "views",
+        "controller"
+    ],
+    "homepage": "https://github.com/italix-net/mvc",
+    "authors": [
+        {
+            "name": "Italix",
+            "email": "info@italix.net"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "italix/contracts": "^2.0",
+        "nikic/fast-route": "^1.3",
+        "guzzlehttp/psr7": "^2.9",
+        "psr/http-server-middleware": "^1.0",
+        "psr/http-server-handler": "^1.0",
+        "psr/container": "^1.0 || ^2.0",
+        "psr/http-factory": "^1.0",
+        "psr/http-message": "^1.0 || ^2.0"
+    },
+    "suggest": {
+        "ext-pdo": "Required by the bundled database-backed services",
+        "italix/encode": "Context-aware output encoding for views",
+        "italix/forms": "View::form() builds a FormHtml; without it the call raises rather than fataling"
+    },
+    "require-dev": {
+        "italix/i18n": "^2.0",
+        "italix/testing": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Italix\\Mvc\\": ""
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "php tests/TranslatorContractTest.php"
+    }
+}
