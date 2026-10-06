@@ -292,12 +292,26 @@ class Engine implements RequestHandlerInterface
         }
 
         // Stream body in 8 KB chunks — safe for large responses
+        //
+        // The flush is what makes that sentence true. Reading in chunks and
+        // then letting PHP hold every one of them until the script ends is
+        // chunked reading, not chunked *sending* — invisible on an ordinary
+        // page and the whole difference for a response meant to arrive
+        // progressively, such as an event stream.
         $body = $response->getBody();
         if ($body->isSeekable()) {
             $body->rewind();
         }
         while (!$body->eof()) {
             echo $body->read(8192);
+
+            // Only ours; a caller that deliberately wrapped this in its own
+            // buffer keeps it.
+            if (ob_get_level() > 0) {
+                ob_flush();
+            }
+
+            flush();
         }
     }
 

@@ -3,6 +3,14 @@
 Format: [Keep a Changelog](https://keepachangelog.com/). Versioning policy: `VERSIONING.md` at the
 project root.
 
+## [2.0.1] — 2026-10-06
+
+### Fixed
+
+- **`Engine::emit()` now flushes after every 8 KB chunk it writes.** The body was read in chunks but
+  PHP held all of them until the script ended, so a response meant to arrive progressively (an event
+  stream) arrived in one piece. An output buffer the caller opened is flushed, never closed. No API change.
+
 ## [2.0.0] — 2026-08-28
 
 ### Changed — BREAKING
